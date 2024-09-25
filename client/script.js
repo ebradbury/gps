@@ -25,13 +25,16 @@ function error(error) {
 function watch() {
 	statusEl.textContent = 'Watching...';
 	locateButtonEl.textContent = 'Stop watching';
+	locateButtonEl.onclick = stop;
 	watchID = navigator.geolocation.watchPosition(success, error, options);
 }
 
 function stop() {
-	clearWatch(watchID);
+	navigator.geolocation.clearWatch(watchID);
+	watchID = null;
 	statusEl.textContent = 'Stopped';
 	locateButtonEl.textContent = 'Watch my location';
+	locateButtonEl.onclick = watch;
 }
 
 if(navigator.geolocation) {
