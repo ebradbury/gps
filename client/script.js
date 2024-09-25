@@ -9,13 +9,14 @@ const options = {
 const statusEl = document.getElementById('status');
 const locationEl = document.getElementById('location');
 const timestampEl = document.getElementById('timestamp');
+const nmeaEl = document.getElementById('nmea');
 const locateButtonEl = document.getElementById('locate');
 
 function success(position) {
 	let date = new Date(position.timestamp);
 	locationEl.href = `https://www.openstreetmap.org/#map=18/${position.coords.latitude}/${position.coords.longitude}`;
 	locationEl.textContent = `${position.coords.latitude}, ${position.coords.longitude}`;
-	timestampEl.textContent = `updated at ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
+	timestampEl.textContent = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
 }
 
 function error(error) {
