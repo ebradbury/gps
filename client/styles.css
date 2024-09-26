@@ -2,6 +2,6 @@ body {
 	font-family: sans-serif;
 }
 
-#location, #timestamp {
+#location, #timestamp, #nmea {
 	font-family: monospace;
 }
