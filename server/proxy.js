@@ -21,6 +21,6 @@ app.post('/', (req, res) => {
     res.send('Data sent to gpsd');
 });
 
-app.listen(8080, () => {
-    console.log('HTTP server running on port 8080');
+app.listen(3000, () => {
+    console.log('HTTP server running on port 3000');
 });
