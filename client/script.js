@@ -75,7 +75,7 @@ function watch() {
 	locateButtonEl.textContent = 'Stop watching';
 	locateButtonEl.onclick = stop;
 	watchID = navigator.geolocation.watchPosition(success, error, options);
-	ws = new WebSocket('ws://gps.elliotbradbury.com');
+	ws = new WebSocket('//gps.elliotbradbury.com');
 }
 
 function stop() {
