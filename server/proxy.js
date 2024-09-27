@@ -17,7 +17,7 @@ wss.on('connection', (ws) => {
 
         setTimeout(() => {
             console.log("Sending WATCH command");
-            gpsdSocket.write(JSON.stringify({class: 'WATCH', enable: true, json:true, nmea:true}));
+            gpsdSocket.write('?WATCH={"enable":true,"json":true,"nmea":true}\n');
         }, 1000);
     });
 
