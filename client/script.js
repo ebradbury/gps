@@ -59,7 +59,7 @@ function success(position) {
 	let GGASentence = positionToNMEA(position);
 	nmeaEl.textContent = GGASentence;
 
-	if(ws.readytate == WebSocket.OPEN) {
+	if(ws.readyState == WebSocket.OPEN) {
 		ws.send(GGASentence);
 	} else {
 		console.log('Skipping send... ws not open');
