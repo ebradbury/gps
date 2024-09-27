@@ -1,26 +1,39 @@
-const express = require('express');
+const WebSocket = require('ws');
 const net = require('net');
 
-const app = express();
-app.use(express.json());
+const wss = new WebSocket.Server({ port: 3000 });
 
 // GPSD server connection details
 const gpsdHost = 'localhost';
 const gpsdPort = 2947;
 
-app.post('/', (req, res) => {
+wss.on('connection', (ws) => {
+    console.log('WebSocket connection established');
+
+    // Connect to gpsd over TCP
     const gpsdSocket = new net.Socket();
     gpsdSocket.connect(gpsdPort, gpsdHost, () => {
         console.log('Connected to gpsd');
-
-        // Send the request body (assumed JSON format) to gpsd
-        gpsdSocket.write(JSON.stringify(req.body));
-        gpsdSocket.end();
     });
 
-    res.send('Data sent to gpsd');
-});
+    // When WebSocket message is received from the browser
+    ws.on('message', (message) => {
+        console.log('Received from WebSocket:', message);
 
-app.listen(3000, () => {
-    console.log('HTTP server running on port 3000');
+        // Send the data to gpsd over TCP
+        gpsdSocket.write(message);
+    });
+
+    // Handle gpsd data
+    gpsdSocket.on('data', (data) => {
+        console.log('Received from gpsd:', data.toString());
+
+        // Optionally send back to the WebSocket client
+        ws.send(data.toString());
+    });
+
+    // Clean up
+    ws.on('close', () => {
+        gpsdSocket.end();
+    });
 });
