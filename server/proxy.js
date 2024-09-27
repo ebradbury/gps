@@ -16,8 +16,9 @@ wss.on('connection', (ws) => {
         console.log('Connected to gpsd');
 
         setTimeout(() => {
+            console.log("Sending WATCH command");
             gpsdSocket.write(JSON.stringify({class: 'WATCH', enable: true, json:true, nmea:true}));
-        }, 100);
+        }, 1000);
     });
 
     // When WebSocket message is received from the browser
