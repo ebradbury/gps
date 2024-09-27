@@ -18,10 +18,10 @@ wss.on('connection', (ws) => {
 
     // When WebSocket message is received from the browser
     ws.on('message', (message) => {
-        console.log('Received from WebSocket:', message);
+        console.log('Received from WebSocket:', message.toString());
 
         // Send the data to gpsd over TCP
-        gpsdSocket.write(message);
+        gpsdSocket.write(message.toString());
     });
 
     // Handle gpsd data
