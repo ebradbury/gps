@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 const net = require('net');
 
-const lastMessage = null;
+var lastMessage = null;
 
 const wsServer = new WebSocket.Server({ port: 3000 });
 const wsClients = new Set();
