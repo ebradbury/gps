@@ -13,17 +13,6 @@ wsServer.on('connection', (ws) => {
     console.log('WebSocket connection received');
     wsClients.add(ws);
 
-    // Connect to gpsd over TCP
-    const gpsdSocket = new net.Socket();
-    gpsdSocket.connect(gpsdPort, gpsdHost, () => {
-        console.log('Connected to gpsd');
-
-        setTimeout(() => {
-            console.log("Sending WATCH command");
-            gpsdSocket.write('?WATCH={"enable":true,"json":true,"nmea":true}\n');
-        }, 1000);
-    });
-
     // When WebSocket message is received from the browser, pass it along 
     ws.on('message', (message) => {
         console.log('Received from WebSocket:', message.toString());
