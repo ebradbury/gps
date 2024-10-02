@@ -6,7 +6,7 @@ var lastMessage = null;
 const wsServer = new WebSocket.Server({ port: 3000 });
 const wsClients = new Set();
 
-const tcpServer = new net.Server({ post: 4000 });
+const tcpServer = new net.Server({ port: 4000 });
 const tcpClients = new Set();
 
 wsServer.on('connection', (ws) => {
