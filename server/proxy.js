@@ -33,7 +33,7 @@ wsServer.on('connection', (ws) => {
 });
 
 tcpServer.on('connection', (tcpClient) => {
-    console.log('TCP connected received');
+    console.log('TCP connection received');
     tcpClients.add(tcpClient);
 
     // Handle gpsd data
