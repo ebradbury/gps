@@ -6,8 +6,9 @@ var lastMessage = null;
 const wsServer = new WebSocket.Server({ port: 3000 });
 const wsClients = new Set();
 
-const tcpServer = new net.Server({ port: 4000 });
+const tcpServer = new net.Server();
 const tcpClients = new Set();
+tcpServer.listen(4000, '127.0.0.1');
 
 wsServer.on('connection', (ws) => {
     console.log('WebSocket connection received');
