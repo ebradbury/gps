@@ -21,7 +21,12 @@ wsServer.on('connection', (ws) => {
 
         tcpClients.forEach(client => {
             console.log('Sending last message to TCP client');
-            client.write(lastMessage);
+            try {
+                client.write(lastMessage);
+            } catch(e) {
+                console.log(e);
+                tcpClients.delete(client);
+            }
         });
     });
 
@@ -50,8 +55,13 @@ tcpServer.on('connection', (tcpClient) => {
         tcpClients.delete(tcpClient);
     });
 
-    tcpClient.write('?WATCH={"enable":true,"json":true,"nmea":true}\n');
+    // tcpClient.write('?WATCH={"enable":true,"json":true,"nmea":true}\n');
     if(lastMessage) {
-        tcpClient.write(lastMessage);
+        try {
+            tcpClient.write(lastMessage);
+        } catch(e) {
+            console.log(e);
+            // tcpClients.delete(client);
+        }
     }
 });
