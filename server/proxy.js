@@ -55,7 +55,7 @@ tcpServer.on('connection', (tcpClient) => {
         tcpClients.delete(tcpClient);
     });
 
-    // tcpClient.write('?WATCH={"enable":true,"json":true,"nmea":true}\n');
+    tcpClient.write('?WATCH={"enable":true,"nmea":true}\n');
     if(lastMessage) {
         try {
             tcpClient.write(lastMessage);
